@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>NYC Mobility Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; margin: 24px; }
+    .row { display: flex; flex-wrap: wrap; gap: 16px; }
+    .card { padding: 16px; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); flex: 1; min-width: 240px; }
+    label { font-size: 12px; color: #666; display: block; margin-bottom: 6px; }
+    input, select { padding: 8px; border: 1px solid #ddd; border-radius: 8px; }
+    button { padding: 10px 14px; border: 0; border-radius: 8px; background: black; color: white; cursor: pointer; }
+    .controls { display: flex; gap: 12px; align-items: end; margin-bottom: 16px; flex-wrap: wrap; }
+    h1 { margin-top: 0; }
+    .kpi { font-size: 22px; font-weight: 700; margin-top: 8px; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 1000px) { .grid { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <h1>NYC Mobility Dashboard</h1>
+
+  <div class="controls">
+    <div>
+      <label for="start">Start date (YYYY-MM-DD)</label>
+      <input id="start" placeholder="2016-01-01">
+    </div>
+    <div>
+      <label for="end">End date (YYYY-MM-DD)</label>
+      <input id="end" placeholder="2016-01-31">
+    </div>
+    <div>
+      <label for="rush">Rush hour</label>
+      <select id="rush">
+        <option value="">Any</option>
+        <option value="1">Rush only</option>
+        <option value="0">Non-rush only</option>
+      </select>
+    </div>
+    <div>
+      <label for="minp">Min passengers</label>
+      <input id="minp" type="number" min="0" step="1" placeholder="0">
+    </div>
+    <div>
+      <label for="maxp">Max passengers</label>
+      <input id="maxp" type="number" min="0" step="1" placeholder="6">
+    </div>
+    <div>
+      <button id="refresh">Refresh</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card"><div>Trips</div><div id="trips" class="kpi">—</div></div>
+    <div class="card"><div>Avg Duration (min)</div><div id="avgDur" class="kpi">—</div></div>
+    <div class="card"><div>Avg Distance (km)</div><div id="avgKm" class="kpi">—</div></div>
+    <div class="card"><div>Avg Speed (km/h)</div><div id="avgKmh" class="kpi">—</div></div>
+  </div>
+
+  <div class="grid" style="margin-top:16px;">
+    <div class="card">
+      <h3 style="margin:0 0 8px 0;">Busiest Hours (Top 5)</h3>
+      <canvas id="hoursChart"></canvas>
+    </div>
+    <div class="card">
+      <h3 style="margin:0 0 8px 0;">Duration Mix</h3>
+      <canvas id="durChart"></canvas>
+    </div>
+    <div class="card">
+      <h3 style="margin:0 0 8px 0;">Speed Histogram (km/h)</h3>
+      <canvas id="speedChart"></canvas>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

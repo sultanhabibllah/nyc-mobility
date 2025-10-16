@@ -1,0 +1,25 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+env/
+venv/
+.venv/
+
+# OS files
+.DS_Store
+
+# Data directories
+data/raw/
+data/processed/*.parquet
+data/processed/*.feather
+
+# SQLite database (we'll include migrations or schema separately)
+data/db/*.db
+
+# Logs
+logs/*.log
+
+# Environment variables
+.env
